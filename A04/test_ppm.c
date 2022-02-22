@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
   strncpy(filename, argv[1], 32);
   
 
-  struct ppm_pixel **matrix = read_ppm("feep-ascii.ppm", &w, &h);
+  struct ppm_pixel **matrix = read_ppm(filename, &w, &h);
   if (matrix == NULL)
   {
     printf("Error\n");
