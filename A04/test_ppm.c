@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include "read_ppm.c"
 #include <stdlib.h>
 #include <string.h>
 
@@ -37,3 +39,5 @@ int main(int argc, char** argv) {
   matrix = NULL;
   return 0;
 }
+
+
