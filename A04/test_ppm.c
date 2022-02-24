@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "read_ppm.c"
+#include "read_ppm.h"
 #include <stdlib.h>
 #include <string.h>
 
