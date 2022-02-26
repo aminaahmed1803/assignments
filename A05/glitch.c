@@ -34,6 +34,9 @@ int main(int argc, char** argv) {
   
   write_ppm(filename,matrix,w,h);
 
+  for (int i = 0; i <w; i++){
+    free(matrix[i]); 
+  }
   free(matrix);
   matrix = NULL;
   return 0;
