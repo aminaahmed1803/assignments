@@ -60,6 +60,7 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
     }
   }
 
+  fclose(infile);
   return matrix;
 }
 
@@ -68,30 +69,42 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
 // array of arrays
 extern void write_ppm(const char* filename, struct ppm_pixel** pxs, int w, int h) {
 
-}
+    FILE* infile = NULL;
+    FILE* outfile = NULL;
 
-int main() {  
-
-  int w, h; 
-  struct ppm_pixel **matrix = read_ppm("monalisa.ppm", &w, &h);
-  if (matrix == NULL)
-  {
-    printf("Error\n");
-    exit(1);
-  }
-  
-  printf("Testing file %s: %d %d\n", "monalisa.ppm", w, h);
-  for (int i = 0; i <w; i++){
-    for (int j = 0; j < h; j++){
-      printf("(%d,%d,%d) ", matrix[i][j].red, matrix[i][j].blue, matrix[i][j].green); ///
+    infile = fopen(filename, "rb");
+    if (infile == NULL) {
+        printf("Error: unable to open file %s\n", "input.txt");
+        exit(1);
     }
-    printf("\n"); 
-  } 
-  
-  for (int i = 0; i <w; i++){
-    free(matrix[i]); 
-  }
-  free(matrix);
-  matrix = NULL;
-  return 0;
+
+    int s = strlen(filename);
+    char newName[100] = "";
+    strncat(newName, filename, s-4);
+    strcat(newName,"-glitch.ppm");
+
+    printf("Writing file %s",newName);
+    outfile = fopen(newName, "wb");
+    if (outfile == NULL) {
+        printf("Error: unable to open outfile\n");
+        exit(1);
+    }
+
+    int ch, n=0;  
+    ch = getc(infile);    
+    while ( n < 4 ) {
+      if (ch == '\n')
+        n++; 
+      putc(ch, outfile);  
+      ch = getc(infile);      
+    }
+
+    for (int i=0 ; i<h ; i++){
+        for (int j=0 ; j<w ; j++){
+            fwrite(&pxs[i][j],sizeof(struct ppm_pixel), 1,outfile);
+        }
+     }
+
+    fclose(infile);
+    fclose(outfile);
 }
