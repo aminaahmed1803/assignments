@@ -30,24 +30,11 @@ int * get_numbers (struct ppm_pixel** pxs, int w, int h){
       idx++;
     }
   } 
-  /*for (int i=0; i<bits ; i++){
-    printf("%d", b[i]);
-    i++;
-    printf("%d", b[i]);
-    i++;
-    printf("%d", b[i]);
-    i++;
-    printf("%d", b[i]);
-    i++;
-    printf("%d", b[i]);
-    i++;
-    printf("%d", b[i]);
-    i++;
-    printf("%d", b[i]);
-    i++;
-    printf("%d\n", b[i]);
+  //for (int i=0; i<bits ; i++){
+  //  printf("%d", b[i]);
+   
     
-  }*/
+  //
   idx =0;
   int * c = (int *)malloc(chars*sizeof(int));
   for (int i = 0; i < bits; idx++)

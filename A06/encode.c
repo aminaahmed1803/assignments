@@ -53,6 +53,8 @@ int main(int argc, char** argv) {
     idx = idx+8;
   }
 
+  for (int i = 0; i<max_bits; i++)
+    printf("%d",bits[i]);
 
   idx = 0;
 
