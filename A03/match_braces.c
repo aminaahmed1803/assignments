@@ -84,7 +84,7 @@ void matchBrace(char * filename)
 
   struct node * top = NULL;
 
-  int ch = 0, line=0, col = 0;  
+  int ch = 0, line=1 , col = 0;  
   while (ch != EOF) {
     ch = getc(infile);   // read next char from the infile stream
     col++; 

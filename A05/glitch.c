@@ -24,8 +24,8 @@ int main(int argc, char** argv) {
   }
 
   srand(time(0));
-  for (int i = 0; i <w; i++){
-    for (int j = 0; j < h; j++){
+  for (int i = 0; i <h; i++){
+    for (int j = 0; j < w; j++){
       matrix[i][j].red = matrix[i][j].red << (rand() % 2); 
       matrix[i][j].green = matrix[i][j].green << (rand() % 2);
       matrix[i][j].blue = matrix[i][j].blue << (rand() % 2);

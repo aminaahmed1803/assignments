@@ -106,7 +106,7 @@ void printbar(struct snack* snacks) {
   struct snack * temp = snacks;
   for(int i; temp != NULL ;i++)
   {  
-    printf("%d) %s          cost: $%f     quantity: %d\n",i, temp->name, temp->cost, temp->quantity);
+    printf("%d) %s          cost: $%0.2f     quantity: %d\n",i, temp->name, temp->cost, temp->quantity);
     temp = temp->next;
   }
 }

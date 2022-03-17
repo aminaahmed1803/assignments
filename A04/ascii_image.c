@@ -6,7 +6,7 @@
  */
 #include <stdio.h>
 #include <string.h>
-#include "read_ppm.c"
+#include "read_ppm.h"
 #include <stdlib.h>
 
 int main(int argc, char** argv) {  //
@@ -29,7 +29,10 @@ int main(int argc, char** argv) {  //
   }
 
   //convert from rbg to characters
-  char ascii[h][w]; 
+  char **ascii = (char**)malloc(h * sizeof(char*));
+  for (int i = 0; i < h ; i++)
+    ascii[i] = (char*) malloc( w * sizeof(char) );
+
   int Intsity; 
   for (int i = 0; i <h; i++){
     for (int j = 0; j < w; j++){
@@ -62,7 +65,12 @@ int main(int argc, char** argv) {  //
   }
   free(matrix);
   matrix = NULL;
+
+  for (int i = 0; i <w; i++){
+    free(ascii[i]); 
+  }
+  free(ascii);
+  ascii = NULL;
   return 0;
   
-  return 0;
 }
