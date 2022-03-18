@@ -19,11 +19,11 @@ char * getword( char * filename)
     fgets(t, sizeof(t), infile);
     int total = atoi(t); 
     //printf(" %d", total);
-    int line = rand() % total;
+    int line = rand() % total +1;
     //printf(" %d", line+2);
     
     char* word = (char*)malloc(sizeof(char)*100);
-    for (int i=0 ; i<line+2 ; i++)
+    for (int i=0 ; i<line ; i++)
     {   
         fgets(word, sizeof(word), infile); 
         //puts(word);
@@ -37,7 +37,7 @@ void guess(char * word)
     int size=strlen(word) ; //word = 4+
     //puts(word);
     //printf(" %d", size); 
-    char * guessword = (char*)malloc( sizeof(char)*(size+1) ); //lenght of guessword = 5
+    char * guessword = (char*)malloc(1+(sizeof(char)*(size))); //lenght of guessword = 5
     strcpy(guessword, word);
     for (int i=0; i<size ;i++) 
         guessword[i] = '_';
