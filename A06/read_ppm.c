@@ -38,8 +38,9 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
     fscanf(infile, "%d %d %d", w, h, &maxVal);
   }
   else {
-    *w = atoi(&x);
-    fscanf(infile, " %d %d ",h, &maxVal);
+    fscanf(infile, "%d %d %d", w, h, &maxVal);
+    *w = (atoi(x)*100) + *w;
+
   }
 
   //declare td Array
@@ -90,15 +91,13 @@ extern void write_ppm(const char* filename, struct ppm_pixel** pxs, int w, int h
     putc('P',outfile);
     putc('6',outfile);
     putc('\n',outfile);
-     putw(w,outfile);
+    putw(w,outfile);
     putc(' ',outfile);
     putw(h,outfile);
     putc('\n',outfile);
     putc('2',outfile);
     putc('2',outfile);
     putc('5',outfile);
-    putc('\n',outfile);
-
 
     for (int i=0 ; i<h ; i++){
       for (int j=0 ; j<w ; j++){
