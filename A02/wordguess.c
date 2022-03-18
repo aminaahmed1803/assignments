@@ -69,9 +69,14 @@ void guess(char * word)
     
     
     printf("\n");
-    
+    puts(word);
+
     free(word);
+    word = NULL;
+
     free(guessword);
+    guessword = NULL;
+    
     printf("You won in %d turns! \n",i);
 }
 

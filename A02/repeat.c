@@ -18,6 +18,7 @@
  */
 void repeat(const char * word, int count, int size)
 {
+    size++;
     int new_size = count*size*sizeof(char);
     if (count == 0) return;
 
