@@ -7,7 +7,7 @@
  * 
  */
 struct snack {
-    char* name; 
+    char name[20]; 
     int quantity; 
     float cost; 
 };
@@ -40,7 +40,6 @@ struct snack * makeshop(int count)
 
     for (int i=0; i<count; i++) 
     {
-         (s+i)->name = (char*)malloc(sizeof ( 4*20));
         printf("\nEnter a name: ");
         scanf(" %s", (s+i)->name);
 
