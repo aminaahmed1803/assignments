@@ -35,17 +35,17 @@ char * getword( char * filename)
 void guess(char * word)
 {
     int size=strlen(word) ; //word = 4+
-    puts(word);
-    printf(" %d", size); 
-    char * guessword = (char*)malloc(sizeof(char)*size); //lenght of guessword = 5
-    strncpy(guessword, word, size);
-    for (int i=0; i<size-1 ;i++) 
+    //puts(word);
+    //printf(" %d", size); 
+    char * guessword = (char*)malloc( sizeof(char)*(size+1) ); //lenght of guessword = 5
+    strcpy(guessword, word);
+    for (int i=0; i<size ;i++) 
         guessword[i] = '_';
     //guessword[size-1] ='\0';
 
     int wordsfilled =size, i; 
     printf("\nWelcome to Word Guess\n"); 
-    for(i=0 ; wordsfilled!=1; i++ )
+    for(i=0 ; wordsfilled>1; i++ )
     {
         char guess; 
         printf("\nTurn %d\n", i+1);
@@ -69,7 +69,7 @@ void guess(char * word)
     
     
     printf("\n");
-    puts(word);
+    
     free(word);
     free(guessword);
     printf("You won in %d turns! \n",i);
