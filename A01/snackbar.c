@@ -57,7 +57,7 @@ void printshop(struct snack* s, int total)
 {   
     for(int i=0; i<total; i++)
     {
-        printf("%d) %s          cost: $%f     quantity: %d\n",i, (s+i)->name, (s+i)->cost, (s+i)->quantity);
+        printf("%d) %s          cost: $%0.2f     quantity: %d\n",i, (s+i)->name, (s+i)->cost, (s+i)->quantity);
     }
 }   
 
