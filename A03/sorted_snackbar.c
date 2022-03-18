@@ -29,23 +29,23 @@ struct snack* insert_sorted(struct snack* snacks, const char* name, int quantity
   if (snacks == NULL)
   {
     snacks = (struct snack*)malloc(sizeof(struct snack)); 
-    strncpy(snacks-> name, name, 32);
+    strcpy(snacks-> name, name);
     snacks-> quantity = quantity;
     snacks-> cost = cost;
     snacks->next = NULL;
     return snacks;
   }
   //new snack is smallest
-  else if ( strcmp (name, snacks->name) < 0)
+ /* else if ( strcmp (name, snacks->name) < 0)
   {
     struct snack * new =  (struct snack*)malloc(sizeof(struct snack)); 
-    strncpy(new-> name, name, 32);
+    strcpy(new-> name, name);
     new-> quantity = quantity;
     new-> cost = cost;
     new->next = snacks;
     snacks = new; 
     return snacks;
-  }
+  }*/
   //new snack is more than head and new snack is more than all
   else 
   {
@@ -56,7 +56,7 @@ struct snack* insert_sorted(struct snack* snacks, const char* name, int quantity
       s = s->next;
     }
     struct snack * new =  (struct snack*)malloc(sizeof(struct snack)); 
-    strncpy(new-> name, name, 32);
+    strcpy(new-> name, name);
     new-> quantity = quantity;
     new-> cost = cost;
     new->next =  s->next;
@@ -70,9 +70,9 @@ struct snack* insert_sorted(struct snack* snacks, const char* name, int quantity
 
 struct snack* addsnack(struct snack* head)
 { 
-  char name[32] ;
-  int quantity;
-  float cost;
+  char name[32] = " " ;
+  int quantity = 0;
+  float cost = 0;
 
   printf("\nEnter a name: ");
   scanf(" %s", name);
