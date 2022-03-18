@@ -45,11 +45,11 @@ void guess(char * word)
 
     int wordsfilled =size, i; 
     printf("\nWelcome to Word Guess\n"); 
-    for(i=0 ; wordsfilled>1; i++ )
+    for(i=0 ; wordsfilled>0; i++ )
     {
         char guess; 
         printf("\nTurn %d\n", i+1);
-        puts(guessword);
+        printf("%s\n", guessword);
         printf("Guess a character: ");
         scanf(" %c", &guess); 
  
@@ -58,6 +58,7 @@ void guess(char * word)
         {
             if (word[i] == guess)
             {
+                word[i] = '_';
                 guessword[i] = guess; 
                 flag = 1;
                 wordsfilled--;
@@ -69,7 +70,7 @@ void guess(char * word)
     
     
     printf("\n");
-    puts(word);
+    printf("%s\n", guessword); 
 
     free(word);
     word = NULL;
