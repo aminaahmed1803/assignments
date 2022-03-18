@@ -57,7 +57,7 @@ void printshop(struct snack* s, int total)
 {   
     for(int i=0; i<total; i++)
     {
-        printf("%d) %s          cost: $%0.2f     quantity: %d\n",i, (s+i)->name, (s+i)->cost, (s+i)->quantity);
+        printf("%d) %s          cost: $%f     quantity: %d\n",i, (s+i)->name, (s+i)->cost, (s+i)->quantity);
     }
 }   
 
@@ -74,7 +74,7 @@ void runshop(struct snack* s, int size)
     float money; 
 
     printf("Welcome to Steven Struct's Snack Bar. \nHow much money do you have? ");
-    scanf("%0.2f", &money); 
+    scanf("%f", &money); 
     printshop(s,size);
     printf("What snack would you like to buy? [0,1,2...] ");
     scanf("%d", &choice);
