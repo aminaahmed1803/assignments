@@ -84,8 +84,12 @@ int main(int argc, char** argv) {
     }
   }
 
+  int s = strlen(filename);
+  char newName[100] = "";
+  strncat(newName, filename, s-4);
+  strcat(newName,"-coded.ppm");
   
-  write_ppm(filename, matrix, w, h);
+  write_ppm(newName, matrix, w, h);
 
   free(message);
   message = NULL;

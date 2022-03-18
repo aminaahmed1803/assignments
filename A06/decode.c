@@ -19,8 +19,8 @@ int * get_numbers (struct ppm_pixel** pxs, int w, int h){
   
   int * b = (int *)malloc(bits*sizeof(int));
 
-  for (int i=0; i<w ; i++){
-    for(int j=0; j<h; j++){
+  for (int i=0; i<h ; i++){
+    for(int j=0; j<w; j++){
       //if (i ==0 && j==0 ) continue;
       b[idx] = pxs[i][j].red % 2;
       idx++;
@@ -30,11 +30,6 @@ int * get_numbers (struct ppm_pixel** pxs, int w, int h){
       idx++;
     }
   } 
-  //for (int i=0; i<bits ; i++){
-  //  printf("%d", b[i]);
-   
-    
-  //
   idx =0;
   int * c = (int *)malloc(chars*sizeof(int));
   for (int i = 0; i < bits; idx++)
@@ -73,14 +68,14 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  int bits = w*h*3, chars = bits/8;
+  //int bits = w*h*3, chars = bits/8;
   printf("Reading tiny_encoded.ppm with width %d and height %d\n", w, h);
   int * c = get_numbers(matrix,w,h);
   printf("\n");
-  for (int i = 0; i<chars-1 ; i++)
-  {
-    printf("%c", toDec(c[i],1) );
-  }
+  //for (int i = 0; i<chars-1 ; i++)
+  //{
+  //  printf("%c", toDec(c[i],1) );
+  //}
 
 
   free (c);

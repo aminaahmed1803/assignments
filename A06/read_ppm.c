@@ -19,26 +19,33 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
   }
 
   //identify file
-  char line[32];
-  char x;  
-  fgets(line, sizeof(line),infile);
-  x = fgetc(infile);
-  if (x != '#'){
-    *w = atoi(&x);
-    fscanf(infile, " %d %d ",h, &maxVal);
-  }
-  else 
+  char x = fgetc(infile);
+  if (x!='P')
   {
+    printf("Invalid file");
+    exit(1);
+  }
+  x = fgetc(infile);
+  if (x!='6')
+  {
+    printf("Invalid file");
+    exit(1);
+  }
+  x = fgetc(infile);
+  x = fgetc(infile);
+  if (x == '#'){
     while( getc(infile) != '\n');
     fscanf(infile, "%d %d %d", w, h, &maxVal);
   }
-
-
+  else {
+    *w = atoi(&x);
+    fscanf(infile, " %d %d ",h, &maxVal);
+  }
 
   //declare td Array
-  struct ppm_pixel **matrix = (struct ppm_pixel**)malloc(*w * sizeof(struct ppm_pixel*));
+  struct ppm_pixel **matrix = (struct ppm_pixel**)malloc(*h * sizeof(struct ppm_pixel*));
   for (int i = 0; i < *h ; i++)
-    matrix[i] = (struct ppm_pixel*) malloc( *h * sizeof(struct ppm_pixel) );
+    matrix[i] = (struct ppm_pixel*) malloc( *w * sizeof(struct ppm_pixel) );
 
   //code to exit if space not allocated == CHECK
   if (matrix == NULL )
@@ -56,8 +63,8 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
   }
 
   //reaadfile
-  for (int i=0 ; i<*w ; i++){
-    for (int j=0 ; j<*h ; j++){
+  for (int i=0 ; i<*h ; i++){
+    for (int j=0 ; j<*w ; j++){
       fread(&matrix[i][j],sizeof(struct ppm_pixel), 1,infile);
     }
   }
@@ -71,42 +78,33 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
 // array of arrays
 extern void write_ppm(const char* filename, struct ppm_pixel** pxs, int w, int h) {
 
-    FILE* infile = NULL;
     FILE* outfile = NULL;
 
-    infile = fopen(filename, "rb");
-    if (infile == NULL) {
-        printf("Error: unable to open file %s\n", "input.txt");
-        exit(1);
-    }
-
-    int s = strlen(filename);
-    char newName[100] = "";
-    strncat(newName, filename, s-4);
-    strcat(newName,"-coded.ppm");
-
-    printf("Writing file %s",newName);
-    outfile = fopen(newName, "wb");
+    printf("Writing file %s",filename);
+    outfile = fopen(filename, "w");
     if (outfile == NULL) {
         printf("Error: unable to open outfile\n");
         exit(1);
     }
 
-    int ch, n=0;  
-    ch = getc(infile);    
-    while ( n < 4 ) {
-      if (ch == '\n')
-        n++; 
-      putc(ch, outfile);  
-      ch = getc(infile);      
-    }
+    putc('P',outfile);
+    putc('6',outfile);
+    putc('\n',outfile);
+     putw(w,outfile);
+    putc(' ',outfile);
+    putw(h,outfile);
+    putc('\n',outfile);
+    putc('2',outfile);
+    putc('2',outfile);
+    putc('5',outfile);
+    putc('\n',outfile);
+
 
     for (int i=0 ; i<h ; i++){
-        for (int j=0 ; j<w ; j++){
-            fwrite(&pxs[i][j],sizeof(struct ppm_pixel), 1,outfile);
-        }
-     }
+      for (int j=0 ; j<w ; j++){
+        fwrite(&pxs[i][j],sizeof(struct ppm_pixel), 1,outfile);
+      }
+    }
 
-    fclose(infile);
     fclose(outfile);
 }
