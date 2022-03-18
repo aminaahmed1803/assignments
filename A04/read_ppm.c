@@ -14,7 +14,7 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
 
   //OPEN FILE
   FILE* infile = NULL;
-  int maxVal;
+  int maxVal=0;
 
   infile = fopen(filename, "r");
   if (infile == NULL) {
@@ -23,8 +23,8 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
   }
 
   //identify file
-  char line[32];
-  char x;  
+  char line[32]= " ";
+  char x=' ';  
   fgets(line, sizeof(line),infile);
   x = fgetc(infile);
   if (x != '#'){
@@ -48,7 +48,7 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
     printf("Cannot allocate space..\n");
     return NULL;
   }
-  for (int i = 0 ; i < *w ; i++)
+  for (int i = 0 ; i < *h ; i++)
   {
     if (matrix[i] == NULL )
     {
@@ -62,7 +62,7 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
         for (int j=0 ; j<*w ; j++){
 
           fscanf(infile, " %d %d %d", &r, &g, &b);
-          if ( r == EOF | g == EOF | b==EOF) break;
+          if ( (r == EOF) | (g == EOF) | (b==EOF)) break;
           matrix[i][j].red = r; 
           matrix[i][j].green = g;
           matrix[i][j].blue = b;

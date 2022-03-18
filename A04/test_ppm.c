@@ -6,8 +6,8 @@
 int main(int argc, char** argv) {  
   //get file 
 
-  char filename[32]; 
-  int w, h;
+  char filename[32]= " "; 
+  int w=0, h=0;
   
   if (argc != 2)
   {
@@ -17,7 +17,9 @@ int main(int argc, char** argv) {
   strncpy(filename, argv[1], 32);
   
 
-  struct ppm_pixel **matrix = read_ppm(filename, &w, &h);
+  struct ppm_pixel **matrix = NULL;
+  matrix=  read_ppm(filename, &w, &h);
+ 
   if (matrix == NULL)
   {
     printf("Error\n");
@@ -32,7 +34,7 @@ int main(int argc, char** argv) {
     printf("\n"); 
   } 
   
-  for (int i = 0; i <w; i++){
+  for (int i = 0; i <h; i++){
     free(matrix[i]); 
   }
   free(matrix);

@@ -60,13 +60,13 @@ int main(int argc, char** argv) {  //
   } 
 
   //free memory allocated
-  for (int i = 0; i <w; i++){
+  for (int i = 0; i <h; i++){
     free(matrix[i]); 
   }
   free(matrix);
   matrix = NULL;
 
-  for (int i = 0; i <w; i++){
+  for (int i = 0; i <h; i++){
     free(ascii[i]); 
   }
   free(ascii);
