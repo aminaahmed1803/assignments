@@ -7,13 +7,14 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include<stdlib.h>
+#include<string.h>
 
 /**
  * @brief a structre to encapsulate the information of a sncak
  * 
  */
 struct snack {
-    char* name; 
+    char name[20]; 
     int quantity; 
     float cost; 
 };
@@ -28,18 +29,18 @@ struct snack * makeshop()
 {
     struct snack* s = (struct snack*)malloc(sizeof(struct snack) * 10); 
     
-    s->name = malloc(sizeof(4*20));
-    s->name = "Coco Puffs";
+    //s->name = malloc(sizeof(4*20));
+    strcpy(s->name, "Coco Puffs");
     s->quantity =4; 
     s->cost =1.5;
 
-    (s+1)->name = malloc(sizeof(4*20));
-    (s+1)->name = "Manchego cheese";
+    //(s+1)->name = malloc(sizeof(4*20));
+    strcpy((s+1)->name, "Manchego cheese");
     (s+1)->quantity =6; 
     (s+1)->cost =15.5;
 
-    (s+2)->name = malloc(sizeof(4*20));
-    (s+2)->name = "Magic beans";
+    //(s+2)->name = malloc(sizeof(4*20));
+    strcpy((s+2)->name ,"Magic beans");
     (s+2)->quantity =0; 
     (s+2)->cost =0.5;
 
@@ -102,6 +103,7 @@ void runshop(struct snack* s, int size)
 int main()
 {
     struct snack * shop = makeshop();
-    runshop(shop, 3); 
+    runshop(shop, 3);
+    free (shop);	
     return 0; 
 }
