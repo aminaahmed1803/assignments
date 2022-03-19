@@ -28,7 +28,7 @@ struct snack* insert_sorted(struct snack* snacks, const char* name, int quantity
   //head is empty
   if (snacks == NULL)
   {
-    snacks = (struct snack*)malloc(sizeof(struct snack)); 
+    snacks  = (struct snack*)malloc(sizeof(struct snack)); 
     strcpy(snacks-> name, name);
     snacks-> quantity = quantity;
     snacks-> cost = cost;
@@ -36,16 +36,17 @@ struct snack* insert_sorted(struct snack* snacks, const char* name, int quantity
     return snacks;
   }
   //new snack is smallest
- /* else if ( strcmp (name, snacks->name) < 0)
+  else if ( strcmp (name, snacks->name) < 0)
   {
-    struct snack * new =  (struct snack*)malloc(sizeof(struct snack)); 
+    struct snack * new = NULL;
+    new =  (struct snack*)malloc(sizeof(struct snack)); 
     strcpy(new-> name, name);
     new-> quantity = quantity;
     new-> cost = cost;
     new->next = snacks;
     snacks = new; 
     return snacks;
-  }*/
+  }
   //new snack is more than head and new snack is more than all
   else 
   {
@@ -55,7 +56,8 @@ struct snack* insert_sorted(struct snack* snacks, const char* name, int quantity
       if(strcmp (name, s->next->name) < 0) break; 
       s = s->next;
     }
-    struct snack * new =  (struct snack*)malloc(sizeof(struct snack)); 
+    struct snack * new = NULL;
+    new =  (struct snack*)malloc(sizeof(struct snack)); 
     strcpy(new-> name, name);
     new-> quantity = quantity;
     new-> cost = cost;
