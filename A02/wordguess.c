@@ -45,7 +45,7 @@ void guess(char * word)
 
     int wordsfilled =size, i; 
     printf("\nWelcome to Word Guess\n"); 
-    for(i=0 ; wordsfilled>0; i++ )
+    for(i=0 ; wordsfilled>1; i++ )
     {
         char guess; 
         printf("\nTurn %d\n", i+1);
