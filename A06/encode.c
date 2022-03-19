@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
       else 
       {
         bits[i] = ascii %2;
-        ascii= ascii/2; 
+        ascii = ascii/2; 
       }
     }
     idx = idx+8;

@@ -51,14 +51,14 @@ int * get_numbers (struct ppm_pixel** pxs, int w, int h){
 
 int main(int argc, char** argv) {
   char filename[32]; 
-  int w, h;
+  int w =0 , h=0;
   
   if (argc != 2)
   {
     printf("Usage: ./test_ppm \n");
     exit(1);
   }
-  strncpy(filename, argv[1], 32);
+  strcpy(filename, argv[1]);
 
   
   struct ppm_pixel **matrix = read_ppm(filename, &w, &h);
@@ -68,14 +68,14 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  //int bits = w*h*3, chars = bits/8;
+  int bits = w*h*3, chars = bits/8;
   printf("Reading tiny_encoded.ppm with width %d and height %d\n", w, h);
   int * c = get_numbers(matrix,w,h);
   printf("\n");
-  //for (int i = 0; i<chars-1 ; i++)
-  //{
-  //  printf("%c", toDec(c[i],1) );
-  //}
+  for (int i = 0; i<chars-1 ; i++)
+  {
+    printf("%c", toDec(c[i],1) );
+  }
 
 
   free (c);

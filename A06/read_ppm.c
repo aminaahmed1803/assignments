@@ -38,9 +38,16 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
     fscanf(infile, "%d %d %d", w, h, &maxVal);
   }
   else {
-    fscanf(infile, "%d %d %d", w, h, &maxVal);
-    *w = (atoi(x)*100) + *w;
-
+    int co = 10;
+    *w = atoi(&x);
+    while (x != ' ')
+    {
+      x = getc(infile);
+      int v = atoi(&x); 
+      *w = (v *co) + *w;
+      co = co*10; 
+    }
+    fscanf(infile, " %d %d",  h, &maxVal);
   }
 
   //declare td Array
