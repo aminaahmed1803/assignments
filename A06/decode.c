@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
 
 
   free (c);
-  for (int i = 0; i <w; i++){
+  for (int i = 0; i <h; i++){
     free(matrix[i]); 
   }
   free(matrix);
