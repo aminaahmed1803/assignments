@@ -18,10 +18,11 @@ int main(int argc, char** argv) {  //
     exit(0);
   }
   char filename[32];
-  strncpy(filename, argv[1], 32);
+  strcpy(filename, argv[1]);
   
-  int w, h;
-  struct ppm_pixel **matrix = read_ppm(filename, &w, &h);
+  int w=0, h=0;
+  struct ppm_pixel **matrix = NULL;
+  matrix =  read_ppm(filename, &w, &h);
   if (matrix == NULL)
   {
     printf("Error\n");
@@ -30,8 +31,8 @@ int main(int argc, char** argv) {  //
 
   //convert from rbg to characters
   char **ascii = (char**)malloc(h * sizeof(char*));
-  for (int i = 0; i < h ; i++)
-    ascii[i] = (char*) malloc( w * sizeof(char) );
+  for (int x = 0; x < h ; x++)
+    ascii[x] = (char*) malloc( w * sizeof(char) );
 
   int Intsity; 
   for (int i = 0; i <h; i++){
@@ -66,7 +67,7 @@ int main(int argc, char** argv) {  //
   free(matrix);
   matrix = NULL;
 
-  for (int i = 0; i <h; i++){
+  for (int i = 0; i<h; i++){
     free(ascii[i]); 
   }
   free(ascii);

@@ -68,5 +68,7 @@ struct ppm_pixel** read_ppm(const char* filename, int* w, int* h) {
           matrix[i][j].blue = b;
        }
     }
+  fclose(infile);
+
   return matrix;
 }
