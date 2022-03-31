@@ -1,4 +1,8 @@
 .DS_Store
+benchmark1
+benchmark2
+reallocate
+print
 scramble
 encode
 decode
