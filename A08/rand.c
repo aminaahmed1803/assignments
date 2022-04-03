@@ -12,3 +12,4 @@ int randExp(int min, int max) {
   int size = (int) ((double) max / exp(r));
   return size;
 }
+

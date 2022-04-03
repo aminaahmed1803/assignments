@@ -37,7 +37,7 @@ int main ( int argc, char* argv[]) {
           fprintf(stderr, "malloc failed\n");
           return(1);
         } 
-        *memory = 123;
+        *memory = size;
         buffer[index] = memory;
       }
     }
@@ -54,3 +54,4 @@ int main ( int argc, char* argv[]) {
   }
   return 0 ;
 }
+

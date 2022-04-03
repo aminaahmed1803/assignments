@@ -19,3 +19,4 @@ benchmark2: benchmark2.c mylloc_list.c sbrk.c rand.c
 clean: 
 	rm benchmark1 benchmark2 reallocate print
 
+
