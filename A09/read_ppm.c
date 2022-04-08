@@ -14,7 +14,7 @@ void write_ppm(const char* filename, struct ppm_pixel** pixels, int w, int h) {
   // your code here
     FILE* outfile = NULL;
 
-    printf("Writing file %s\s",filename);
+    printf("Writing file %s\n",filename);
     outfile = fopen(filename, "w");
     if (outfile == NULL) {
         printf("Error: unable to open outfile\n");
