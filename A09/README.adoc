@@ -11,14 +11,14 @@ Run your executable, `single_mandelbrot`, with the following sizes and record
 the amount of time it takes to compute each image.
 
 [cols="1,1"]
-!===
+!===============
 | Size | Time (s) 
-| 100 | todo
-| 400 | todo
-| 800 | todo
-| 1000 | todo
-| 2000 | todo
-!===
+| 100  | 0.049150
+| 400  | 0.381297
+| 800  | 1.384764
+| 1000 | 2.199390
+| 2000 | 8.643157
+!==================
 
 = Multi-process mandelbrot
 

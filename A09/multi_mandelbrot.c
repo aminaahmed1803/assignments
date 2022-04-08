@@ -9,6 +9,9 @@
 #include <sys/ipc.h>
 #include "read_ppm.h"
 
+
+
+
 int main(int argc, char* argv[]) {
   int size = 480;
   float xmin = -2.0;
