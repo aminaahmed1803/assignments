@@ -95,10 +95,10 @@ int main(int argc, char* argv[]) {
   snprintf( ti, 20, "%ld", now  );
 
   char filename[100] = "mandelbrot-";
-  strncat(filename, s, 100 );
-  strncat(filename, "-", 100 );
-  strncat(filename, ti, 100 );
-  strncat(filename, ".ppm", 100 );
+  strncat(filename, s, 99 );
+  strncat(filename, "-", 99 );
+  strncat(filename, ti, 99 );
+  strncat(filename, ".ppm", 99 );
 
   write_ppm(filename,color,size,size);
 
