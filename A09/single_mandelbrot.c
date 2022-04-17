@@ -47,10 +47,7 @@ int main(int argc, char* argv[]) {
 
   //pallet("pal.ppm", palette, 1000);
    // compute imge
-  struct ppm_pixel **color = (struct ppm_pixel**)malloc(size * sizeof(struct ppm_pixel*));
-    for (int i = 0; i < size ; i++)
-      color[i] = (struct ppm_pixel*) malloc( size * sizeof(struct ppm_pixel) );
- 
+  struct ppm_pixel *color = (struct ppm_pixel*)malloc(size * size * sizeof(struct ppm_pixel*)); 
 
  clock_t t = clock();
   for (int i=0 ; i<size ; i++) { //each row in the image
@@ -69,17 +66,18 @@ int main(int argc, char* argv[]) {
         iter++;
       }
       //printf("%d ", iter);
+      int idx = (i*size) + j;
       if (iter < maxIterations) 
       {
-        color[i][j].red = palette[iter].red;
-        color[i][j].green = palette[iter].green;
-        color[i][j].blue = palette[iter].blue;
+        color[idx].red = palette[iter].red;
+        color[idx].green = palette[iter].green;
+        color[idx].blue = palette[iter].blue;
       }
       else
       {
-        color[i][j].red = 0;
-        color[i][j].green = 0;
-        color[i][j].blue = 0;
+        color[idx].red = 0;
+        color[idx].green = 0;
+        color[idx].blue = 0;
       }   
    }
   }
@@ -102,8 +100,5 @@ int main(int argc, char* argv[]) {
 
   write_ppm(filename,color,size,size);
 
-
-  for (int i = 0; i < size ; i++)
-    free(color[i]);
   free(color);
 }
