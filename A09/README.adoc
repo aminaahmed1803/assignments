@@ -26,11 +26,11 @@ Run your executable, `multi_mandelbrot`, with the following sizes and record
 the amount of time it takes to compute each image.
 
 [cols="1,1"]
-!===
+!===============
 | Size | Time (s) 
-| 100  | todo
-| 400  | todo
-| 800  | todo
-| 1000 | todo
-| 2000 | todo
-!===
+| 100  | 0.001076
+| 400  | 0.001317
+| 800  | 0.001165
+| 1000 | 0.001362
+| 2000 | Invalid
+!=================
