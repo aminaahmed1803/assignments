@@ -26,6 +26,9 @@ struct threadData {
   int j_end;
 };
 
+pthread_barrier_t barrier;
+
+
 void generate_set (struct threadData* data ){
 
   printf("Thread sub-image block: cols (%d, %d) to rows (%d, %d)\n", data->j_begin, data->j_end, data->i_begin, data->i_end);
@@ -111,12 +114,7 @@ void generate_set (struct threadData* data ){
       }
     }
   }
-  pthread_barrier_t barrier;
-  int ret1 = pthread_barrier_init(&barrier, NULL, 4);
-  if (ret1) {
-    printf("ERROR: pthread_barrier_init failed\n");
-    exit(0);
-  }
+
   pthread_barrier_wait(&barrier);
 
   //generate color 
@@ -184,7 +182,13 @@ int main(int argc, char* argv[]) {
 	pthread_t four;
 
   pthread_mutex_t mutex;
-	pthread_mutex_init(&mutex, NULL);
+  pthread_mutex_init(&mutex, NULL);
+
+  int ret1 = pthread_barrier_init(&barrier, NULL, 4);
+  if (ret1) {
+    printf("ERROR: pthread_barrier_init failed\n");
+    exit(0);
+  }
 
   struct threadData td_one   = {belongs, counts, color, &mutex, size, xmin, xmax, ymin, ymax, maxIterations, 0, size/2, 0, size/2};
   struct threadData td_two   = {belongs, counts, color, &mutex, size, xmin, xmax, ymin, ymax, maxIterations, 0, size/2, size/2, size};
