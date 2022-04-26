@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
   pthread_t* tids = malloc(sizeof(pthread_t) * 4);
   struct threadData* dataArr = malloc(sizeof(struct threadData) * 4);
   for (int i=0; i < 4; i++) {
-    pthread_t thread = NULL;
+    pthread_t thread;
     tids[i] = thread;
     struct threadData threadData_i = {u, v, i*(SIZE/4), (i+1)*(SIZE/4), 0};
     dataArr[i] = threadData_i;
