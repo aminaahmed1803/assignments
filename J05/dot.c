@@ -18,14 +18,13 @@ struct threadData {
 
 void dotprod(void* threadData_i) {
   struct threadData * data = (struct threadData*) threadData_i;
-  //printf("start: %d, stop: %d\n", data->start, data->stop);
   for (int i = data->start; i < data->stop; i++) {
     int x= data->u[i];
     int y = data->v[i];
     data->dp += x*y;
-    printf("u: %d, v: %d\n", data->u[i], data->v[i]);
+    //printf("u: %d, v: %d\n", data->u[i], data->v[i]);
   }
-  printf("dp: %d\n",data->dp);
+  //printf("dp: %d\n",data->dp);
 }
 
 int main(int argc, char *argv[]) {
@@ -38,7 +37,7 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < SIZE; i++) {
     v[i] = rand() % 1000 - 500;
     u[i] = rand() % 1000 - 500;
-    printf("u: %d, v: %d\n", u[i], v[i]);
+    //printf("u: %d, v: %d\n", u[i], v[i]);
     dotproduct += u[i] * v[i];
   }
   printf("Ground truth dot product: %d\n", dotproduct);
@@ -48,8 +47,6 @@ int main(int argc, char *argv[]) {
   pthread_t* tids = malloc(sizeof(pthread_t) * 4);
   struct threadData* dataArr = malloc(sizeof(struct threadData) * 4);
   for (int i=0; i < 4; i++) {
-    pthread_t thread;
-    tids[i] = thread;
     struct threadData threadData_i = {u, v, i*(SIZE/4), (i+1)*(SIZE/4), 0};
     dataArr[i] = threadData_i;
     pthread_create(&tids[i], NULL, (void*) dotprod, (void*) &dataArr[i]);
