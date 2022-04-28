@@ -36,6 +36,7 @@ void *malloc (size_t size) {
 	} else {
 		struct chunk *cnk = (struct chunk*)memory;
 	       	cnk->size = size ;
+		cnk->inUse = size; 
 		return (void*)(cnk + 1);
 	}
 
@@ -45,7 +46,7 @@ void free(void *memory) {
    if(memory != NULL) {
    /* we're jumping back one chunk position */
       struct chunk *cnk = (struct chunk*)((struct chunk*)memory - 1);
-      //cnk->inUse = 0;
+      cnk->inUse = 0;
       cnk->next = flist;
       flist = cnk;
    }
@@ -61,12 +62,12 @@ void fragstats(void* buffers[], int len) {
 
         while(next != NULL) {
 	   free++;
-	   //if (next->inUse >0 ){
+	   if (next->inUse >0 ){
 	   	int mem =next->size;
            	external +=  mem; 
 	    	if (mem > ex_b) ex_b = mem;
 	    	if (mem < ex_s) ex_s = mem;
-	  // }
+	  }
            // printf("size: %d, inUse: %d\n",next->size, next->inUse);
 	   next = next->next;
         }

@@ -16,7 +16,10 @@ reallocate: reallocate.c mylloc_list.c sbrk.c rand.c
 benchmark2: benchmark2.c mylloc_list.c sbrk.c rand.c
 	$(CC) -g -Wall -Wvla -Werror benchmark2.c mylloc_list.c sbrk.c rand.c -o $@ -lm
 
+test: test.c mylloc_list.c sbrk.c rand.c
+	$(CC) -g -Wall -Wvla -Werror test.c mylloc_list.c sbrk.c rand.c -o $@ -lm 
+	
 clean: 
-	rm benchmark1 benchmark2 reallocate print
+	test rm benchmark1 benchmark2 reallocate print
 
 
