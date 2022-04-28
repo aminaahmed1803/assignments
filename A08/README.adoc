@@ -56,8 +56,7 @@ this amount makes sense.
 	Bytes Allocated at the End:  1156 (0x484) bytes
 
 	1040 bytes is the memory allocated for buffer for stdout.
-	The extra 116 bytes are the total of the sizes of pointer
-	allocated along with the structs chunk.  
+	The extra 116 bytes are the total of the sizes the chunck header.  
 
 
 = Fragementation

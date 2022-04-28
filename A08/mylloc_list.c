@@ -22,7 +22,7 @@ void *malloc (size_t size) {
 			} else {
 				flist = next->next;
 			}
-			next->inUse= size;
+			next->inUse = size;
 			return (void*)(next + 1); 
 		} else {
 			prev = next;
@@ -60,13 +60,13 @@ void fragstats(void* buffers[], int len) {
 	int external=0, ex_b=0;
 
         while(next != NULL) {
-	   if (next->inUse >0 ){
-	 	free++;
-	   	int mem =next->size -  next->inUse;
-           	external = external + mem; 
+	   free++;
+	   //if (next->inUse >0 ){
+	   	int mem =next->size;
+           	external +=  mem; 
 	    	if (mem > ex_b) ex_b = mem;
 	    	if (mem < ex_s) ex_s = mem;
-	   }
+	  // }
            // printf("size: %d, inUse: %d\n",next->size, next->inUse);
 	   next = next->next;
         }
@@ -79,14 +79,14 @@ void fragstats(void* buffers[], int len) {
 	   if (buffers[i] != NULL)
 	   {
 		used++;
-		int s = ((struct chunk*) buffers[i])->size;
+		struct chunk *cnk = (struct chunk*)((struct chunk*)buffers[i] - 1);
+		int s = cnk->size;
 		internal += s;
 		if (s > in_b) in_b = s;
                 if (s < in_s) in_s = s;
 		//printf("Allocated: %p\n", buffers[i]);
            }
 	}
-
 	total = free+used; 
 	printf("Total blocks: %d, Free: %d, Used: %d\n",total, free, used );
 	printf("Internal unused: total: %d average: %0.1f smallest: %d largest: %d\n", internal, average, in_s, in_b);
