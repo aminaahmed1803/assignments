@@ -55,44 +55,43 @@ void free(void *memory) {
 
 void fragstats(void* buffers[], int len) {
 	int total=0, used=0, free=0;
+	float average; 
+	int external=0, ex_b=0, ex_s = 0; 
+	int internal=0, in_b=0, in_s=0;
+
 
 	struct chunk *next = flist ;
-	int ex_s = next->size-  next->inUse;
-	int external=0, ex_b=0;
-
-        while(next != NULL) {
+	ex_s = next->size;
+   while(next != NULL) 
+	{
 	   free++;
-	   if (next->inUse >0 ){
-	   	int mem =next->size;
-           	external +=  mem; 
-	    	if (mem > ex_b) ex_b = mem;
-	    	if (mem < ex_s) ex_s = mem;
-	  }
-           // printf("size: %d, inUse: %d\n",next->size, next->inUse);
-	   next = next->next;
-        }
+	   int mem =next->size;
+      external +=  mem; 
+	   if (mem > ex_b) ex_b = mem;
+	   if (mem < ex_s) ex_s = mem;
+		next = next->next;
+   }
 
 	struct chunk *cnk = (struct chunk*)((struct chunk*)buffers[0] - 1);
-	int internal=0, in_b=0, in_s=cnk->size;
+	in_s=cnk->size;
 	for (int i=0 ; i<len ; i++)
 	{
-	
 	   if (buffers[i] != NULL)
 	   {
-		used++;
-		struct chunk *cnk = (struct chunk*)((struct chunk*)buffers[i] - 1);
-		int s = cnk->size;
-		internal += s;
-		if (s > in_b) in_b = s;
-                if (s < in_s) in_s = s;
+			used++;
+			struct chunk *cnk = (struct chunk*)((struct chunk*)buffers[i] - 1);
+			int s = cnk->size;
+			internal += s;
+			if (s > in_b) in_b = s;
+      	if (s < in_s) in_s = s;
 		//printf("Allocated: %p\n", buffers[i]);
-           }
+      }
 	}
 	total = free+used;
-        float average = external / free;
 	printf("Total blocks: %d, Free: %d, Used: %d\n",total, free, used );
-	printf("Internal unused: total: %d average: %0.1f smallest: %d largest: %d\n", internal, average, in_s, in_b);
 	average = internal / used;
+	printf("Internal unused: total: %d average: %0.1f smallest: %d largest: %d\n", internal, average, in_s, in_b);
+	average = external / free;
 	printf("External unused: total: %d average: %0.1f smallest: %d largest: %d\n",external, average, ex_s,ex_b);
 } 
 
