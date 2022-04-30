@@ -71,9 +71,9 @@ void fragstats(void* buffers[], int len) {
            // printf("size: %d, inUse: %d\n",next->size, next->inUse);
 	   next = next->next;
         }
-	float average = external / free; 
 
-	int internal=0, in_b=0, in_s=1000;
+	struct chunk *cnk = (struct chunk*)((struct chunk*)buffers[0] - 1);
+	int internal=0, in_b=0, in_s=cnk->size;
 	for (int i=0 ; i<len ; i++)
 	{
 	
@@ -88,10 +88,11 @@ void fragstats(void* buffers[], int len) {
 		//printf("Allocated: %p\n", buffers[i]);
            }
 	}
-	total = free+used; 
+	total = free+used;
+        float average = external / free;
 	printf("Total blocks: %d, Free: %d, Used: %d\n",total, free, used );
 	printf("Internal unused: total: %d average: %0.1f smallest: %d largest: %d\n", internal, average, in_s, in_b);
-	average = external / used;
+	average = internal / used;
 	printf("External unused: total: %d average: %0.1f smallest: %d largest: %d\n",external, average, ex_s,ex_b);
 } 
 
