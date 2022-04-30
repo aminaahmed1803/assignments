@@ -72,8 +72,8 @@ void fragstats(void* buffers[], int len) {
 		next = next->next;
    }
 
-	struct chunk *cnk = (struct chunk*)((struct chunk*)buffers[0] - 1);
-	in_s=cnk->size;
+	//struct chunk *cnk = (struct chunk*)((struct chunk*)buffers[0] - 1);
+	in_s=1000000;
 	for (int i=0 ; i<len ; i++)
 	{
 	   if (buffers[i] != NULL)
