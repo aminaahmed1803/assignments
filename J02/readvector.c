@@ -6,7 +6,25 @@
 // The values should be returned in a flat float array
 float* readvector(const char* filename, int *size) {
   // todo: implement me
-  return NULL;
+  FILE* infile = NULL;
+  infile = fopen(filename, "r");
+  if (infile == NULL) {
+    printf("Error: unable to open file %s\n", filename);
+    exit(1);
+  }
+
+  *size = fgetc(infile);
+  float* vector = (float*) malloc (sizeof(float) * *size);
+  for ( int i=0; getc(infile) != EOF; i++)
+  {
+    char line[32];
+    fgets(line, sizeof(line), infile);
+    vector[i] = atof(line);
+    printf("%f\n", vector[i]);
+  }
+
+    fclose(infile);
+    return vector ;
 }
 
 int main(int argc, char** argv) {
@@ -19,8 +37,8 @@ int main(int argc, char** argv) {
   float* vector = readvector(argv[1], &size);
 
   // todo: print vector values
-
   free(vector);
   return 0;
-}
 
+
+}

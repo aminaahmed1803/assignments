@@ -61,7 +61,7 @@ void generate_set(struct ppm_pixel* color, int size, int xmin, int xmax, int ymi
         x = xtmp;
         iter++;
       }
-
+      //printf("%d ", iter);
       int idx = (i*size) + j;
       if (iter < maxIterations) 
       {
@@ -88,7 +88,6 @@ int main(int argc, char* argv[]) {
   int maxIterations = 1000;
   int numProcesses = 4;
   struct ppm_pixel palette[1000];
-  int f= size/numProcesses;
 
   int opt;
   while ((opt = getopt(argc, argv, ":s:l:r:t:b:p:")) != -1) {
@@ -121,10 +120,7 @@ int main(int argc, char* argv[]) {
     palette[i].blue = baseblue + rand() % 100 - 50;
   }
 
-  /*struct ppm_pixel **color = (struct ppm_pixel**)malloc(size * sizeof(struct ppm_pixel*));
-    for (int i = 0; i < size ; i++)
-      color[i] = (struct ppm_pixel*) malloc( size * sizeof(struct ppm_pixel) );
-*/
+
   int shmid; 
   shmid = shmget(IPC_PRIVATE, sizeof(struct ppm_pixel) * size * size , 0644 | IPC_CREAT);
   if (shmid == -1) {
@@ -138,20 +134,15 @@ int main(int argc, char* argv[]) {
     exit(1);
   } 
 
-  
-  //buffer[40] = '\0';
   clock_t t = clock();
   for (int i = 0; i < numProcesses ; i++) {
     int pid = fork();
     if (pid == 0) {
-      //char c = i+'1'; // convert from integer to char
-      //for (int j = 0; j < 9; j++) {
-      //  buffer[i*10 + j] = c;
-      //}
       generate_set(color, size, xmin, xmax, ymin, ymax, maxIterations, palette, i);
-      //buffer[i*10+9] = '\n';
+      fflush(stdout);
       exit(0);
     } else {
+      fflush(stdout);
       printf("Launched child process: %d\n", pid);
     }
   }
@@ -159,12 +150,10 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i <  numProcesses ; i++) {
     int status;
     int pid = wait(&status);
+    fflush(stdout);
     printf("Child process complete: %d\n", pid);
   }
 
-  // compute image
-  //clock_t t = clock();
-  //generate_set(color, size, xmin, xmax, ymin, ymax, maxIterations, palette);
   t = clock() - t;
   double time_taken = ((double)t)/CLOCKS_PER_SEC;
   printf("Computed mandelbrot set (%dx%d) in %f seconds\n", size, size, time_taken );
@@ -188,7 +177,7 @@ int main(int argc, char* argv[]) {
   //free colour
   //free(color);
 
-   if (shmdt(color) == -1) {
+  if (shmdt(color) == -1) {
     perror("Error: cannot detatch from shared memory\n");
     exit(1);
   }
